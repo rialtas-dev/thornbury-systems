@@ -14,7 +14,7 @@ npm start       # http://localhost:4310
 
 ## Layout
 
-- `src/invoices` billing. Totals, balances.
+- `src/invoices` billing. Totals, balances, VAT.
 - `src/scheduling` work orders, engineer dispatch, customer appointment windows.
 - `src/shared` money and dates. Both are used by both sides, so changes here reach further than they look.
 - `src/db.ts` the seed data. Stands in for the SQL Server tables.
@@ -31,5 +31,10 @@ written down anywhere.
 
 Money is in pence. Dates are stored UTC and shown UK local. Those two rules are the
 only ones everybody agreed on.
+
+VAT liability lives in `src/invoices/vat.ts`. Water supplied to a domestic customer is
+zero rated; water supplied to a commercial one is standard rated; engineer work is
+standard rated for everybody. It is keyed off `accountType`, deliberately not off
+`vatRegistered`. VAT is rounded once per rate band, not per line.
 
 There is no CLAUDE.md and no contributor guide. That was on Priya's list.
